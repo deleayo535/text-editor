@@ -24,6 +24,13 @@
   color: white;
 }
 
+.App .editor {
+  width: 500px;
+  margin-left: 20%;
+  /* margin-right: 20%; */
+  margin-top: 50px;
+}
+
 .App-link {
   color: #61dafb;
 }
