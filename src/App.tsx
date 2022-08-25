@@ -11,8 +11,11 @@ import {
   QuickToolbar,
   RichTextEditorComponent,
 } from "@syncfusion/ej2-react-richtexteditor";
+import { UploaderComponent } from "@syncfusion/ej2-react-inputs";
+
 // import { UploaderComponent } from "@syncfusion/ej2-react-inputs";
-import Uploader from "./components/Uploader";
+// import Uploader from "./components/Uploader";
+// import FileBrowser from "./components/FileBrowser";
 
 class App extends React.Component {
   public customToolbarSettings: object = {
@@ -45,6 +48,14 @@ class App extends React.Component {
     ],
   };
 
+  public path: object = {
+    chunkSize: 102400,
+    removeUrl: "https://ej2.syncfusion.com/services/api/uploadbox/Remove",
+    retryAfterDelay: 3000,
+    retryCount: 5,
+    saveUrl: "https://ej2.syncfusion.com/services/api/uploadbox/Save",
+  };
+
   textObject!: RichTextEditorComponent;
   public textValue!: string;
   getFormattedContent() {
@@ -56,11 +67,12 @@ class App extends React.Component {
       <>
         <div
           style={{
-            width: "700px",
+            width: "800px",
             // marginLeft: "20px",
-            marginLeft: "20%",
+            marginLeft: "15%",
             /* margin-right: 20%; */
             marginTop: "50px",
+            marginBottom: "50px",
           }}
         >
           <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
@@ -68,21 +80,17 @@ class App extends React.Component {
               Send
             </ButtonComponent>
           </div>
+          {/* <FileBrowser /> */}
+          <UploaderComponent asyncSettings={this.path} />
+
           <RichTextEditorComponent
+            height={250}
+            placeholder={"Type Something"}
             ref={(richtexteditor: RichTextEditorComponent) => {
               this.textObject = richtexteditor;
             }}
             toolbarSettings={this.customToolbarSettings}
           >
-            <p>
-              The Toolbar contains commands to align the text, insert a link,
-              insert an image, insert list, undo/redo operations, HTML view,
-              etc...
-            </p>
-            <p>
-              The Toolbar is fully <b>customizable.</b>
-            </p>
-
             <Inject
               services={[
                 Toolbar,
@@ -95,7 +103,7 @@ class App extends React.Component {
               ]}
             ></Inject>
           </RichTextEditorComponent>
-          <Uploader />
+          {/* <Uploader /> */}
         </div>
       </>
     );
